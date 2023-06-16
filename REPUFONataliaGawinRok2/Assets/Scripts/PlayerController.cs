@@ -6,7 +6,6 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb2d;
 
-    // Start is called before the first frame update
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -18,12 +17,13 @@ public class PlayerController : MonoBehaviour
         float moveVertical = Input.GetAxis("Vertical");
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
         rb2d.AddForce(movement * 15);
-
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if (collision.CompareTag("Pickup"))
+        {
+            Destroy(collision.gameObject);
+        }
     }
 }
